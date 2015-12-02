@@ -1,0 +1,32 @@
+Software-Engineering: Aussprache App (Englisch/Deutsch)
+
+
+Beschreibung:
+
+Ein Benutzer kann sich nach erfolgreichem Einloggen an verschieden Aussprache Aufgaben versuchen. Dabei soll zunächst ein von der App auf Englisch vorgesprochener Text nachgesprochen werden. In der nächsten Stufe sollen englische Sätze vorgelesen werden.
+Als dritte Stufe soll der Nutzer deutsche Sätze auf Englisch übersetzen und aussprechen.
+
+Use-Cases:
+  - Benutzer loggt sich ein
+  - Benutzer wählt Modus und absolviert Aufgaben in vorgegebener Reihenfolge
+  - Falsch oder Richtig wird sofort angezeigt
+  - Nachsprechen:
+    - Satz wird angezeigt und vorgesprochen
+    - Satz muss nachgesprochen werden
+  - Lesen und Aussprechen:
+    - Satz wird angezeigt
+    - Satz muss nachgesprochen werden
+  - Übersetzen und Aussprechen:
+    - Satz wird auf Deutsch angezeigt
+    - Satz soll direkt auf Englisch übersetzt und Gesprochen werden
+  - Bei jedem Modus werden Punkte mitgezählt und am Ende angezeigt
+    - Schwierige Sätze geben mehr Punkte
+    - Highscore wird gespeichert
+
+
+Classes: 
+  - MainActivity for Home Screen
+  - ListenAndRepeatActivitiy for first mode
+  - ReadAndRepeatActivity for second mode
+  - TranslateAndRepeatActivity for third mode
+  - Engine.class for shared logic and helper functions
