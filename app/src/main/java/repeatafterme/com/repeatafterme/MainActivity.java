@@ -1,7 +1,18 @@
 package repeatafterme.com.repeatafterme;
 
+import android.content.Context;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /*
 This class represents the home screen view and all of its logic.
 
@@ -11,6 +22,69 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Show login view first. After successful login show main view
+        setContentView(R.layout.login);
+
+        // Set username and password input hints
+        final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+        final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
+        usernameWrapper.setHint("Username");
+        passwordWrapper.setHint("Password");
+
+        // Button onclick bind
+        final Button loginbtn = (Button) findViewById(R.id.loginbtn);
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard();
+
+                // Get username and password input
+                String username = usernameWrapper.getEditText().getText().toString();
+                String password = passwordWrapper.getEditText().getText().toString();
+
+                Log.d("username: ", username);
+                Log.d("password: ", password);
+
+                // User and password validation
+                if (!validateUser(username)) {
+                    usernameWrapper.setError("Not a valid username! At least 6 characters required.");
+                } else if (!validatePassword(password)) {
+                    passwordWrapper.setError("Not a valid password! At least 6 characters required.");
+                } else {
+                    usernameWrapper.setErrorEnabled(false);
+                    passwordWrapper.setErrorEnabled(false);
+                    doLogin();
+                }
+            }
+        });
+
+    }
+
+    // Hide Android keyboard if no view in focus
+    private void hideKeyboard() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).
+                    hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    // Username validation
+    public boolean validateUser(String user) {
+        return user.length() > 5;
+        //TODO Add more validation logic
+    }
+
+    // Password validation
+    public boolean validatePassword(String password) {
+        return password.length() > 5;
+    }
+
+    private void doLogin(){
+        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+
+        // Set view to main activity view
         setContentView(R.layout.activity_main);
     }
 }
