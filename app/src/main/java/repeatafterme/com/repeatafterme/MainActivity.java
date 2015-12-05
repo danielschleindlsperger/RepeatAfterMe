@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -84,7 +85,14 @@ public class MainActivity extends AppCompatActivity {
     private void doLogin(){
         Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
 
+        // Setup main view
+        createMainView();
+    }
+    private void createMainView(){
+
         // Set view to main activity view
         setContentView(R.layout.activity_main);
+
+
     }
 }
