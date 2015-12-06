@@ -7,6 +7,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="@color/colorBg"
     >
 
     <TextView
@@ -49,7 +50,7 @@
                 android:layout_height="60dp"
                 android:layout_toRightOf="@id/listen_and_repeat_photo"
                 android:id="@+id/listen_and_repeat_title"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:gravity="center"
                 android:text="Listen &amp; Repeat"
                 />
@@ -58,7 +59,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/listen_and_repeat_desc"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:layout_below="@id/listen_and_repeat_title"
                 android:layout_toRightOf="@id/listen_and_repeat_photo"
                 android:text="Wiederhole den dir vorgesprochenen Text!"
@@ -99,7 +100,7 @@
                 android:layout_height="60dp"
                 android:layout_toRightOf="@id/read_and_repeat_photo"
                 android:id="@+id/read_and_repeat_title"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:gravity="center"
                 android:text="Read &amp; Repeat"
                 />
@@ -108,7 +109,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/read_and_repeat_desc"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:layout_below="@id/read_and_repeat_title"
                 android:layout_toRightOf="@id/read_and_repeat_photo"
                 android:text="Lies den dargestellten Text vor!"
