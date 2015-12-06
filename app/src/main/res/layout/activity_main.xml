@@ -32,14 +32,13 @@
         <RelativeLayout
             android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
-            android:layout_height="180dp"
+            android:layout_height="130dp"
             android:padding="15dp"
             >
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/listen_and_repeat_photo"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentTop="true"
                 android:background="@color/colorAccent"
@@ -47,7 +46,7 @@
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="100dp"
+                android:layout_height="60dp"
                 android:layout_toRightOf="@id/listen_and_repeat_photo"
                 android:id="@+id/listen_and_repeat_title"
                 android:textSize="30sp"
@@ -60,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/listen_and_repeat_desc"
                 android:textSize="15sp"
-                android:layout_below="@id/listen_and_repeat_photo"
+                android:layout_below="@id/listen_and_repeat_title"
+                android:layout_toRightOf="@id/listen_and_repeat_photo"
                 android:text="Wiederhole den dir vorgesprochenen Text!"
                 />
 
@@ -82,14 +82,13 @@
         <RelativeLayout
             android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
-            android:layout_height="180dp"
+            android:layout_height="130dp"
             android:padding="15dp"
             >
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/read_and_repeat_photo"
-                android:layout_marginBottom="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentTop="true"
                 android:background="@color/colorPrimaryDark"
@@ -97,7 +96,7 @@
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="100dp"
+                android:layout_height="60dp"
                 android:layout_toRightOf="@id/read_and_repeat_photo"
                 android:id="@+id/read_and_repeat_title"
                 android:textSize="30sp"
@@ -110,7 +109,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/read_and_repeat_desc"
                 android:textSize="15sp"
-                android:layout_below="@id/read_and_repeat_photo"
+                android:layout_below="@id/read_and_repeat_title"
+                android:layout_toRightOf="@id/read_and_repeat_photo"
                 android:text="Lies den dargestellten Text vor!"
                 />
 
