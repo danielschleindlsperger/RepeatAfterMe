@@ -28,6 +28,8 @@
         android:layout_gravity="bottom"
         cardview:cardElevation="4dp"
         cardview:cardCornerRadius="4dp"
+        android:tag="ListenAndRepeat"
+        android:onClick="startGame"
         >
 
         <RelativeLayout
@@ -78,6 +80,8 @@
         android:layout_gravity="bottom"
         cardview:cardElevation="4dp"
         cardview:cardCornerRadius="4dp"
+        android:tag="ReadAndRepeat"
+        android:onClick="startGame"
         >
 
         <RelativeLayout

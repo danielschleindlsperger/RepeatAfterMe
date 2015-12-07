@@ -1,7 +1,9 @@
 package repeatafterme.com.repeatafterme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,6 +95,20 @@ public class MainActivity extends AppCompatActivity {
         // Set view to main activity view
         setContentView(R.layout.activity_main);
 
-
+    }
+    public void startGame(View v){
+        String mode = v.getTag().toString();
+        Toast.makeText(getApplicationContext(), mode, Toast.LENGTH_SHORT).show();
+        Log.d("Mode selected: ", mode);
+//        Intent intent = new Intent(getApplicationContext(),ReadAndRepeatActivity.class);
+//        startActivity(intent);
+        if (mode.equalsIgnoreCase("ListenAndRepeat")){
+            Intent LARIntent = new Intent(getApplicationContext(), ListenAndRepeatActivity.class);
+            startActivity(LARIntent);
+        }
+        if (mode.equalsIgnoreCase("ReadAndRepeat")){
+            Intent RARIntent = new Intent(getApplicationContext(), ReadAndRepeatActivity.class);
+            startActivity(RARIntent);
+        }
     }
 }

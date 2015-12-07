@@ -1,5 +1,6 @@
 package repeatafterme.com.repeatafterme;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,10 +21,10 @@ public class Data {
         }
     }
 
-    public String initStrings(){
-        int arrLength = ListenAndRepeat.size();
+    public String initStrings(ArrayList arr){
+        int arrLength = arr.size();
         int randomIndex = randInt(0, arrLength-1);
-        String RandomEntry = ListenAndRepeat.get(randomIndex);
+        String RandomEntry = arr.get(randomIndex).toString();
         return RandomEntry;
     }
 
@@ -48,12 +49,12 @@ public class Data {
 
     // Add entries for Read and Repeat game mode
     private void initReadAndRepeat(){
-        ReadAndRepeat.add("Hello");
-        ReadAndRepeat.add("Test");
-        ReadAndRepeat.add("Water");
-        ReadAndRepeat.add("House");
-        ReadAndRepeat.add("Desk");
-        ReadAndRepeat.add("Tree");
+//        ReadAndRepeat.add("Hello");
+//        ReadAndRepeat.add("Test");
+//        ReadAndRepeat.add("Water");
+//        ReadAndRepeat.add("House");
+//        ReadAndRepeat.add("Desk");
+//        ReadAndRepeat.add("Tree");
         ReadAndRepeat.add("Seth at Sainsbury's sells thick socks.");
         ReadAndRepeat.add("Roberta ran rings around the Roman ruins.");
         ReadAndRepeat.add("Stupid superstition!");

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,10 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.activity_read_and_repeat);
         TextView textToRead = (TextView) findViewById(R.id.textToRead);
         Data firstPackage = new Data("ReadAndRepeat");
+        Log.d("Contents of Package: ", firstPackage.ReadAndRepeat.toString());
+
         findViewById(R.id.button1).setOnClickListener(this);
-        textToRead.setText(firstPackage.initStrings());
+        textToRead.setText(firstPackage.initStrings(firstPackage.ReadAndRepeat));
     }
     public void onClick(View v) {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
