@@ -55,14 +55,10 @@ public class Data {
 //        ReadAndRepeat.add("House");
 //        ReadAndRepeat.add("Desk");
 //        ReadAndRepeat.add("Tree");
-        ReadAndRepeat.add("Seth at Sainsbury's sells thick socks.");
+        ReadAndRepeat.add("A tree has many leaves");
         ReadAndRepeat.add("Roberta ran rings around the Roman ruins.");
-        ReadAndRepeat.add("Stupid superstition!");
-        ReadAndRepeat.add("There was a fisherman named Fisher\n" +
-                "who fished for some fish in a fissure.\n" +
-                "Till a fish with a grin,\n" +
-                "pulled the fisherman in.\n" +
-                "Now they're fishing the fissure for Fisher.");
+        ReadAndRepeat.add("Stupid answer");
+        ReadAndRepeat.add("If you want respect you have to earn it");
     }
 
 
