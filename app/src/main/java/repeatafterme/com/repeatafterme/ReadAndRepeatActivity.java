@@ -29,6 +29,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_and_repeat);
+
         TextView textToRead = (TextView) findViewById(R.id.textToRead);
         Data firstPackage = new Data("ReadAndRepeat");
         Log.d("Contents of Package: ", firstPackage.ReadAndRepeat.toString());
