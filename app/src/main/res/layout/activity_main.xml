@@ -7,7 +7,8 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="@color/colorBg"
+    android:background="@drawable/notizblatt_klein"
+
 
     >
 
