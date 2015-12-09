@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 String username = usernameWrapper.getEditText().getText().toString();
                 String password = passwordWrapper.getEditText().getText().toString();
 
-                Log.d("username: ", username);
-                Log.d("password: ", password);
+                Log.d("username", username);
+                Log.d("password", password);
 
                 // User and password validation
                 if (!validateUser(username)) {
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     public void startGame(View v){
         String mode = v.getTag().toString();
         Toast.makeText(getApplicationContext(), mode, Toast.LENGTH_SHORT).show();
-        Log.d("Mode selected: ", mode);
+        Log.d("Mode selected", mode);
 //        Intent intent = new Intent(getApplicationContext(),ReadAndRepeatActivity.class);
 //        startActivity(intent);
         if (mode.equalsIgnoreCase("ListenAndRepeat")){

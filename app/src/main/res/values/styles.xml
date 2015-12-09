@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="GameModeTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="primary_button" >
         <item name="android:background">@color/colorAccent</item>
         <item name="android:layout_width" >wrap_content</item>
@@ -23,4 +29,12 @@
         <item name="android:paddingBottom">10dp</item>
     </style>
 
+    <style name="speak_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:src">@android:drawable/ic_btn_speak_now</item>
+        <item name="android:tint">#FFFFFF</item>
+    </style>
 </resources>

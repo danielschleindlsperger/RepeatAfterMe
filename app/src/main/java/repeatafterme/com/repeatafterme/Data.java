@@ -9,56 +9,86 @@ import java.util.Random;
  */
 public class Data {
 
-    ArrayList<String> ListenAndRepeat = new ArrayList<String>();
-    ArrayList<String> ReadAndRepeat = new ArrayList<String>();
-
+    ArrayList<String> Data;
+    private int levelCount;
+    private int correct;
+    private int incorrect;
     // Construct data set based on supplied mode
-    public Data(String mode){
+    public Data(String mode) throws Exception {
+        Data = new ArrayList<String>();
+        levelCount = 0;
         if (mode == "ListenAndRepeat"){
             initListenAndRepeat();
+
         }else if (mode == "ReadAndRepeat"){
             initReadAndRepeat();
         }
+        else{
+            throw new NullPointerException();
+        }
     }
 
-    public String initStrings(ArrayList arr){
-        int arrLength = arr.size();
-        int randomIndex = randInt(0, arrLength-1);
-        String RandomEntry = arr.get(randomIndex).toString();
-        return RandomEntry;
+
+    // Return dataset for next level
+    public String getSpeechString(int level, ArrayList arr){
+        if (level < arr.size()){
+            String Entry = arr.get(level).toString();
+            return Entry;
+        }
+        else{
+            return "MODE_FINISHED";
+        }
+    }
+
+    public void incrementLevel(Boolean answer){
+        if (answer){
+            correct++;
+        }
+        if(!answer){
+            incorrect++;
+        }
+         levelCount++;
+    }
+
+
+    public int getCurrentLevel(){
+        return levelCount;
+    }
+
+    public int getCorrect(){
+        return correct;
+    }
+
+    public int getIncorrect(){
+        return incorrect;
     }
 
     // Add entries for Listen and Repeat game mode
     private void initListenAndRepeat(){
-        ListenAndRepeat.add("Hello");
-        ListenAndRepeat.add("Test");
-        ListenAndRepeat.add("Water");
-        ListenAndRepeat.add("House");
-        ListenAndRepeat.add("The sixth sick sheik's sixth sheep's sick.");
-        ListenAndRepeat.add("I want to be a juror on a rural brewery robbery case.");
-        ListenAndRepeat.add("How many boards\n" +
-                "Could the Mongols hoard\n" +
-                "If the Mongol hordes got bored?");
-        ListenAndRepeat.add("How can a clam cram in a clean cream can?");
-        ListenAndRepeat.add("The thirty-three thieves thought that they thrilled the throne throughout Thursday.");
-        ListenAndRepeat.add("Can you can a can as a canner can can a can?");
-
-
-
+        Data.add("Hello");
+        Data.add("Test");
+        Data.add("Water");
+        Data.add("Team");
+//        Data.add("People");
+//        Data.add("Map");
+//        Data.add("Thanks");
+//        Data.add("Group");
+//        Data.add("Food");
+//        Data.add("Bird");
     }
 
     // Add entries for Read and Repeat game mode
     private void initReadAndRepeat(){
-//        ReadAndRepeat.add("Hello");
-//        ReadAndRepeat.add("Test");
-//        ReadAndRepeat.add("Water");
-//        ReadAndRepeat.add("House");
-//        ReadAndRepeat.add("Desk");
-//        ReadAndRepeat.add("Tree");
-        ReadAndRepeat.add("A tree has many leaves");
-        ReadAndRepeat.add("Roberta ran rings around the Roman ruins.");
-        ReadAndRepeat.add("Stupid answer");
-        ReadAndRepeat.add("If you want respect you have to earn it");
+        Data.add("Hello");
+        Data.add("Test");
+        Data.add("Water");
+        Data.add("House");
+        Data.add("Desk");
+        Data.add("Tree");
+        Data.add("A tree has many leaves");
+//        ReadAndRepeat.add("Roberta ran rings around the Roman ruins.");
+        Data.add("Stupid answer");
+        Data.add("If you want respect you have to earn it");
     }
 
 

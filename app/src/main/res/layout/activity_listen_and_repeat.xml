@@ -69,27 +69,20 @@
     </TextView>
 
     <Button
-        android:id="@+id/speak_to_me"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Speak To Me"
-        android:drawableLeft="@android:drawable/ic_lock_silent_mode_off"
         style="@style/primary_button"
+        android:id="@+id/speak_to_me"
+        android:text=" Vorsprechen"
+        android:drawableLeft="@android:drawable/ic_lock_silent_mode_off"
         android:layout_gravity="center"
         android:onClick="talkText" />
 
 
     <android.support.design.widget.FloatingActionButton
+        style="@style/speak_button"
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:src="@android:drawable/ic_btn_speak_now"
-        android:layout_below="@+id/textToRead"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="78dp"></android.support.design.widget.FloatingActionButton
+        android:layout_marginTop="78dp"
+        >
+    </android.support.design.widget.FloatingActionButton
         >
 
     <TextView
