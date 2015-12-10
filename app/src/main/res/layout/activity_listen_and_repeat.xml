@@ -21,7 +21,7 @@
         <RelativeLayout
             android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
-            android:layout_height="130dp"
+            android:layout_height="100dp"
             android:padding="15dp"
             >
             <ImageView
@@ -30,28 +30,21 @@
                 android:id="@+id/listen_and_repeat_photo"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentTop="true"
-                android:background="@color/colorAccent"
+                android:src="@drawable/speak"
                 />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="60dp"
-                android:layout_toRightOf="@id/listen_and_repeat_photo"
                 android:id="@+id/listen_and_repeat_title"
                 android:textSize="25sp"
                 android:gravity="center"
                 android:text="Listen &amp; Repeat"
-                />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listen_and_repeat_desc"
-                android:textSize="12sp"
-                android:layout_below="@id/listen_and_repeat_title"
-                android:layout_toRightOf="@id/listen_and_repeat_photo"
-                android:text="Wiederhole den dir vorgesprochenen Text!"
-                />
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="28dp"
+                android:layout_marginStart="28dp" />
 
         </RelativeLayout>
 
@@ -81,7 +74,7 @@
         style="@style/speak_button"
         android:id="@+id/button1"
         android:layout_marginTop="78dp"
-        >
+        android:layout_gravity="center_horizontal">
     </android.support.design.widget.FloatingActionButton
         >
 
