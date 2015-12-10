@@ -34,7 +34,7 @@
                 android:id="@+id/read_and_repeat_photo"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentTop="true"
-                android:src="@drawable/write2"
+                android:src="@drawable/write"
                 />
 
             <TextView
