@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Show login view first. After successful login show main view
         setContentView(R.layout.login);
-
         // Set username and password input hints
         final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
         final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
@@ -58,11 +58,13 @@ public class MainActivity extends AppCompatActivity {
                     usernameWrapper.setErrorEnabled(false);
                     passwordWrapper.setErrorEnabled(false);
                     doLogin();
+                    welcomeMessage(username);
                 }
             }
         });
 
-    }
+
+        }
 
     // Hide Android keyboard if no view in focus
     private void hideKeyboard() {
@@ -77,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean validateUser(String user) {
         return user.length() > 5;
         //TODO Add more validation logic
+    }
+// Make individual welcome message
+    private void welcomeMessage(String user) {
+        final TextView textViewToChange = (TextView) findViewById(R.id.text_welcome);
+        textViewToChange.setText(
+                "Welcome " + user + "! What do you want to do?");
     }
 
     // Password validation

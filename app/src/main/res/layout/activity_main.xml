@@ -15,11 +15,11 @@
     <TextView
         android:id="@+id/text_welcome"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:layout_weight="1"
         android:textSize="15sp"
-        android:text="Welcome User What do you want to do?"/>
+        android:text="@string/welcome"/>
 
 
     <!-- Entry 1: Listen and Repeat -->
@@ -46,7 +46,7 @@
                 android:id="@+id/listen_and_repeat_photo"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentTop="true"
-                android:background="@color/colorAccent"
+                android:src="@drawable/speak"
                 />
 
             <TextView
@@ -98,7 +98,7 @@
                 android:id="@+id/read_and_repeat_photo"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentTop="true"
-                android:background="@color/colorPrimaryDark"
+                android:src="@drawable/write"
                 />
 
             <TextView

@@ -55,6 +55,9 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             if(status != TextToSpeech.ERROR) {
                 t1.setLanguage(Locale.UK);
             }
+            else {
+                Toast.makeText(getApplicationContext(), "Sorry, there was an error", Toast.LENGTH_SHORT).show();
+            }
         }
     });
     }
@@ -109,7 +112,12 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
 
         String data = getData();
         //String TextAsSting = textToRead.getText().toString();
-        t1.speak(data, TextToSpeech.QUEUE_FLUSH, null);
+        try {
+            t1.speak(data, TextToSpeech.QUEUE_FLUSH, null);
+        }catch(Exception e){
+            Toast.makeText(this, "Error initializing talk text engine.", Toast.LENGTH_LONG).show();
+        }
+        
     }
 
     private void initLevel(TextView view){
