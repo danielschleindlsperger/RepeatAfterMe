@@ -41,40 +41,45 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_read_and_repeat);
             textToRead = (TextView) findViewById(R.id.textToRead);
-            Package = new Data("ReadAndRepeat", 5);
+            Package = new Data("ReadAndRepeat", 1);
             progressStatus = 0;
             initLevel(textToRead);
 
             Log.d("Contents of Package", Package.Data.toString());
             findViewById(R.id.button1).setOnClickListener(this);
-            // Start long running operation in a background thread
-            progressBar = (ProgressBar) findViewById(R.id.progressBar2);
-            progressText = (TextView) findViewById(R.id.read_progress);
-            progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#fbc02d"), PorterDuff.Mode.SRC_IN);
-            defaultProgressbar();
 
         }catch(Exception e){
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "There was an error initializing the mode you selected", Toast.LENGTH_SHORT).show();
         }
 
+        // Start long running operation in a background thread
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        progressText = (TextView) findViewById(R.id.read_progress);
+        progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#fbc02d"), PorterDuff.Mode.SRC_IN);
+        defaultProgressbar();
+
+
     }
+
+    // Start SpeechToText Engine
     public void onClick(View v) {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-UK");
         try {
             startActivityForResult(i, REQUEST_OK);
         } catch (Exception e) {
             Toast.makeText(this, "Error initializing speech to text engine.", Toast.LENGTH_LONG).show();
         }
     }
+
+    // Get results from SpeechToText Engine
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         TextView outputText = (TextView) findViewById(R.id.text1);
         TextView textToRead = (TextView) findViewById(R.id.textToRead);
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==REQUEST_OK  && resultCode==RESULT_OK) {
             ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            //((TextView)findViewById(R.id.text1)).setText(thingsYouSaid.get(0));
             String speech = thingsYouSaid.get(0).toString();
             Boolean outcome = Engine.checkSpeech(textToRead, speech);
             if(outcome){
@@ -134,14 +139,16 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         }
         else{
             view.setText(nextEntry);
-            Toast.makeText(getApplicationContext(), "Current Level: " + Package.getCurrentLevel(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getApplicationContext(), "Current Level: " + Package.getCurrentLevel(), Toast.LENGTH_SHORT).show();
         }
     }
 
+    // To be called when all levels of game mode have been completed
     private void finishMode(){
         setContentView(R.layout.mode_finished);
         confirmButton = (Button) findViewById(R.id.confirm_finish);
         confirmButton.setOnClickListener(confirmListener);
+        setScoreboard();
         int corrects = Package.getCorrect();
         int incorrects = Package.getIncorrect();
         Toast.makeText(getApplicationContext(), "Mode complete! Congrats!\n Correct: " + corrects + "\n Incorrect: " + incorrects, Toast.LENGTH_SHORT).show();
@@ -150,7 +157,21 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
     // Onclick event to return to main view after finishing a game mode
     View.OnClickListener confirmListener = new View.OnClickListener(){
         public void onClick(View v){
-            setContentView(R.layout.activity_main);
+            Intent finished = new Intent(getApplicationContext(), MainActivity.class);
+            finished.putExtra("VIEW", "main");
+            Log.d("VIEW", finished.getStringExtra("VIEW"));
+            startActivity(finished);
         }
     };
+
+    private void setScoreboard(){
+        int corrects = Package.getCorrect();
+        int incorrects = Package.getIncorrect();
+
+        TextView correct = (TextView) findViewById(R.id.finish_correct);
+        TextView incorrect = (TextView) findViewById(R.id.finish_incorrect);
+
+        correct.setText("Correct Answers: " + corrects);
+        incorrect.setText("Incorrect Answers: " + incorrects);
+    }
 }

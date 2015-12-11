@@ -57,6 +57,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "There was an error initializing the mode you selected", Toast.LENGTH_SHORT).show();
         }
+
         // Start long running operation in a background thread
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressText = (TextView) findViewById(R.id.textView1);
@@ -74,15 +75,16 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
                 t1.setLanguage(Locale.UK);
             }
             else {
-                Toast.makeText(getApplicationContext(), "Sorry, there was an error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Sorry, there was an error initializing the speech engine", Toast.LENGTH_SHORT).show();
             }
         }
     });
     }
 
+    // Start SpeechToText Engine
     public void onClick(View v) {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-US");
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-UK");
         try {
             startActivityForResult(i, REQUEST_OK);
 
@@ -92,17 +94,16 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
 
     }
 
+    // Get results from SpeechToText Engine
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        TextView outputText = (TextView) findViewById(R.id.text1);
+        TextView recognizedText = (TextView) findViewById(R.id.recognized_text);
         TextView textToRead = (TextView) findViewById(R.id.textToRead);
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==REQUEST_OK  && resultCode==RESULT_OK) {
-            //((TextView)findViewById(R.id.text1)).setText(thingsYouSaid.get(0));
             ArrayList<String> thingsYouSaid = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String speech = thingsYouSaid.get(0).toString();
             Boolean outcome = Engine.checkSpeech(textToRead, speech);
             if(outcome){
-                outputText.setText("Correct. Very good!");
                 Package.incrementLevel(outcome);
                 initLevel(textToRead);
             }else{
@@ -111,16 +112,15 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
                 stringBuilder.append(speech);
                 stringBuilder.append(". Incorrect.");
                 String output = stringBuilder.toString();
-                outputText.setText(output);
+                recognizedText.setText(output);
                 Package.incrementLevel(outcome);
                 initLevel(textToRead);
             }
             incProgress();
-            //((TextView)findViewById(R.id.text1)).setText(thingsYouSaid.get(0));
         }
     }
 
-// ProgressBar logic
+    // ProgressBar logic
     public void incProgress() {
         progressBar.setMax(Package.getMaxLevel());
         new Thread(new Runnable() {
@@ -146,11 +146,13 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             }
         }).start();
     }
-public void defaultProgressbar(){
-    progressBar.setMax(Package.getMaxLevel());
-    progressBar.setProgress(progressStatus);
-    progressText.setText(progressStatus + "/" + progressBar.getMax());
-}
+
+    public void defaultProgressbar(){
+        progressBar.setMax(Package.getMaxLevel());
+        progressBar.setProgress(progressStatus);
+        progressText.setText(progressStatus + "/" + progressBar.getMax());
+    }
+
     public String getData(){
        TextView textToRead = (TextView) findViewById(R.id.textToRead);
        String textAsString = (String) textToRead.getText();
@@ -158,7 +160,6 @@ public void defaultProgressbar(){
     }
 
     public void talkText(View v){
-
         String data = getData();
         //String TextAsSting = textToRead.getText().toString();
         try {
@@ -166,7 +167,6 @@ public void defaultProgressbar(){
         }catch(Exception e){
             Toast.makeText(this, "Error initializing talk text engine.", Toast.LENGTH_LONG).show();
         }
-
     }
 
     private void initLevel(TextView view){
@@ -176,14 +176,16 @@ public void defaultProgressbar(){
         }
         else{
             view.setText(nextEntry);
-            Toast.makeText(getApplicationContext(), "Current Level: " + Package.getCurrentLevel(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getApplicationContext(), "Current Level: " + Package.getCurrentLevel(), Toast.LENGTH_SHORT).show();
         }
     }
 
+    // To be called when all levels of game mode have been completed
     private void finishMode(){
         setContentView(R.layout.mode_finished);
         confirmButton = (Button) findViewById(R.id.confirm_finish);
         confirmButton.setOnClickListener(confirmListener);
+        setScoreboard();
         int corrects = Package.getCorrect();
         int incorrects = Package.getIncorrect();
         Toast.makeText(getApplicationContext(), "Mode complete! Congrats!\n Correct: " + corrects + "\n Incorrect: " + incorrects, Toast.LENGTH_SHORT).show();
@@ -198,4 +200,15 @@ public void defaultProgressbar(){
             startActivity(finished);
         }
     };
+
+    private void setScoreboard(){
+        int corrects = Package.getCorrect();
+        int incorrects = Package.getIncorrect();
+
+        TextView correct = (TextView) findViewById(R.id.finish_correct);
+        TextView incorrect = (TextView) findViewById(R.id.finish_incorrect);
+
+        correct.setText("Correct Answers: " + corrects);
+        incorrect.setText("Incorrect Answers: " + incorrects);
+    }
 }
