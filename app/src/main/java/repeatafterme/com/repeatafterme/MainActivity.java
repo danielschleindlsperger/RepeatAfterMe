@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
         // Get view that is to be display through intent message
         // DOES NOT WORK AS OF NOW!!!!
         Intent viewIntent = getIntent();
-        String view = viewIntent.getStringExtra(ListenAndRepeatActivity.VIEW);
-        if (view == "main"){
+        String view = viewIntent.getStringExtra("VIEW");
+
+        if (null != view && view.matches("main")){
             setContentView(R.layout.activity_main);
         }else {
             setContentView(R.layout.login);
