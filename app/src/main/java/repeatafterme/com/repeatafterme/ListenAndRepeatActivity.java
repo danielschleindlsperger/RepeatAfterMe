@@ -58,6 +58,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         textView = (TextView) findViewById(R.id.textView1);
         progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#ffd600"), PorterDuff.Mode.SRC_IN);
+        defaultProgressbar();
 
             }
 
@@ -142,7 +143,10 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             }
         }).start();
     }
-
+public void defaultProgressbar(){
+    progressBar.setProgress(progressStatus);
+    textView.setText(progressStatus + "/" + progressBar.getMax());
+}
     public String getData(){
        TextView textToRead = (TextView) findViewById(R.id.textToRead);
        String textAsString = (String) textToRead.getText();

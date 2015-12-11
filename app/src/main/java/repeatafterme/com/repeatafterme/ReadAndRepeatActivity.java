@@ -51,7 +51,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
             progressBar = (ProgressBar) findViewById(R.id.progressBar2);
             textView = (TextView) findViewById(R.id.read_progress);
             progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#fbc02d"), PorterDuff.Mode.SRC_IN);
-            //0xFFFF0000, android.graphics.PorterDuff.Mode.MULTIPLY);
+            defaultProgressbar();
 
         }catch(Exception e){
             e.printStackTrace();
@@ -120,6 +120,10 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
                 }
             }
         }).start();
+    }
+    public void defaultProgressbar(){
+        progressBar.setProgress(progressStatus);
+        textView.setText(progressStatus + "/" + progressBar.getMax());
     }
 
     private void initLevel(TextView view){
