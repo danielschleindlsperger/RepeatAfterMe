@@ -80,16 +80,17 @@ public class MainActivity extends AppCompatActivity {
         return user.length() > 5;
         //TODO Add more validation logic
     }
-// Make individual welcome message
-    private void welcomeMessage(String user) {
-        final TextView textViewToChange = (TextView) findViewById(R.id.text_welcome);
-        textViewToChange.setText(
-                "Welcome " + user + "! What do you want to do?");
-    }
 
     // Password validation
     public boolean validatePassword(String password) {
         return password.length() > 5;
+    }
+
+    // Make individual welcome message
+    private void welcomeMessage(String user) {
+        final TextView welcomeText = (TextView) findViewById(R.id.text_welcome);
+        welcomeText.setText(
+                "Welcome " + user + "! What do you want to do?");
     }
 
     private void doLogin(){
@@ -98,18 +99,20 @@ public class MainActivity extends AppCompatActivity {
         // Setup main view
         createMainView();
     }
-    private void createMainView(){
+
+    public void createMainView(){
 
         // Set view to main activity view
         setContentView(R.layout.activity_main);
 
     }
+
+    // Start a game mode activity based on selection
     public void startGame(View v){
         String mode = v.getTag().toString();
-        Toast.makeText(getApplicationContext(), mode, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getApplicationContext(), mode, Toast.LENGTH_SHORT).show();
         Log.d("Mode selected", mode);
-//        Intent intent = new Intent(getApplicationContext(),ReadAndRepeatActivity.class);
-//        startActivity(intent);
+
         if (mode.equalsIgnoreCase("ListenAndRepeat")){
             Intent LARIntent = new Intent(getApplicationContext(), ListenAndRepeatActivity.class);
             startActivity(LARIntent);

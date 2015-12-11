@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
     private int progressStatus;
     private Handler handler = new Handler();
     private TextView progressText;
+    Button confirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,8 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#ffd600"), PorterDuff.Mode.SRC_IN);
         defaultProgressbar();
 
-            }
+
+    }
 
     protected void createTextToSpeech(){
     t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -122,7 +125,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         progressBar.setMax(Package.getMaxLevel());
         new Thread(new Runnable() {
             public void run() {
-                if (progressStatus < progressBar.getMax()+1) {
+                if (progressStatus <= progressBar.getMax()) {
                     progressStatus += 1;
                     // Update the progress bar and display the
                     //current value in the text view
@@ -178,8 +181,18 @@ public void defaultProgressbar(){
     }
 
     private void finishMode(){
+        setContentView(R.layout.mode_finished);
+        confirmButton = (Button) findViewById(R.id.confirm_finish);
+        confirmButton.setOnClickListener(confirmListener);
         int corrects = Package.getCorrect();
         int incorrects = Package.getIncorrect();
         Toast.makeText(getApplicationContext(), "Mode complete! Congrats!\n Correct: " + corrects + "\n Incorrect: " + incorrects, Toast.LENGTH_SHORT).show();
     }
+
+    // Onclick event to return to main view after finishing a game mode
+    View.OnClickListener confirmListener = new View.OnClickListener(){
+        public void onClick(View v){
+            setContentView(R.layout.activity_main);
+        }
+    };
 }
