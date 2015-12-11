@@ -144,6 +144,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         }).start();
     }
 public void defaultProgressbar(){
+    progressBar.setMax(4);
     progressBar.setProgress(progressStatus);
     textView.setText(progressStatus + "/" + progressBar.getMax());
 }

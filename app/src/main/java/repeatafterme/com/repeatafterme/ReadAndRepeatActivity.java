@@ -122,6 +122,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         }).start();
     }
     public void defaultProgressbar(){
+        progressBar.setMax(9);
         progressBar.setProgress(progressStatus);
         textView.setText(progressStatus + "/" + progressBar.getMax());
     }
