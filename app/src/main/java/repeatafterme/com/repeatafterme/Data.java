@@ -1,6 +1,5 @@
 package repeatafterme.com.repeatafterme;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,10 +12,12 @@ public class Data {
     private int levelCount;
     private int correct;
     private int incorrect;
+    private int maxLevel;
     // Construct data set based on supplied mode
-    public Data(String mode) throws Exception {
+    public Data(String mode, int maxLevel) throws Exception {
         Data = new ArrayList<String>();
         levelCount = 0;
+        this.maxLevel = maxLevel;
         if (mode == "ListenAndRepeat"){
             initListenAndRepeat();
 
@@ -30,9 +31,9 @@ public class Data {
 
 
     // Return dataset for next level
-    public String getSpeechString(int level, ArrayList arr){
-        if (level < arr.size()){
-            String Entry = arr.get(level).toString();
+    public String getSpeechString(int level){
+        if (level < maxLevel){
+            String Entry = this.Data.get(level).toString();
             return Entry;
         }
         else{
@@ -63,18 +64,22 @@ public class Data {
         return incorrect;
     }
 
+    public int getMaxLevel(){
+        return maxLevel;
+    }
+
     // Add entries for Listen and Repeat game mode
     private void initListenAndRepeat(){
         Data.add("Hello");
         Data.add("Test");
         Data.add("Water");
         Data.add("Team");
-//        Data.add("People");
-//        Data.add("Map");
-//        Data.add("Thanks");
-//        Data.add("Group");
-//        Data.add("Food");
-//        Data.add("Bird");
+        Data.add("People");
+        Data.add("Map");
+        Data.add("Thanks");
+        Data.add("Group");
+        Data.add("Food");
+        Data.add("Bird");
     }
 
     // Add entries for Read and Repeat game mode

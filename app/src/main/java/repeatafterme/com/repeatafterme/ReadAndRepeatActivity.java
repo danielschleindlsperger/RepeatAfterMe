@@ -13,8 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 /*
@@ -28,9 +26,9 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
     protected static final int REQUEST_OK = 1;
     TextView textToRead;
     private ProgressBar progressBar;
-    private int progressStatus = 0;
+    private int progressStatus;
     private Handler handler = new Handler();
-    private TextView textView;
+    private TextView progressText;
 
 
     @Override
@@ -41,15 +39,15 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_read_and_repeat);
             textToRead = (TextView) findViewById(R.id.textToRead);
-            Package = new Data("ReadAndRepeat");
-
+            Package = new Data("ReadAndRepeat", 5);
+            progressStatus = 0;
             initLevel(textToRead);
 
             Log.d("Contents of Package", Package.Data.toString());
             findViewById(R.id.button1).setOnClickListener(this);
             // Start long running operation in a background thread
             progressBar = (ProgressBar) findViewById(R.id.progressBar2);
-            textView = (TextView) findViewById(R.id.read_progress);
+            progressText = (TextView) findViewById(R.id.read_progress);
             progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#fbc02d"), PorterDuff.Mode.SRC_IN);
             defaultProgressbar();
 
@@ -85,7 +83,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("You said: ");
                 stringBuilder.append(speech);
-                stringBuilder.append(". Incorrect. Try again!");
+                stringBuilder.append(". Incorrect.");
                 String output = stringBuilder.toString();
                 outputText.setText(output);
                 Package.incrementLevel(outcome);
@@ -97,17 +95,17 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
 
     // ProgressBar logic
     public void incProgress() {
-        progressBar.setMax(9);
+        progressBar.setMax(Package.getMaxLevel());
         new Thread(new Runnable() {
             public void run() {
-                if (progressStatus < 10) {
+                if (progressStatus < progressBar.getMax()+1) {
                     progressStatus += 1;
                     // Update the progress bar and display the
                     //current value in the text view
                     handler.post(new Runnable() {
                         public void run() {
                             progressBar.setProgress(progressStatus);
-                            textView.setText(progressStatus + "/" + progressBar.getMax());
+                            progressText.setText(progressStatus + "/" + progressBar.getMax());
                         }
                     });
                     try {
@@ -122,13 +120,13 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         }).start();
     }
     public void defaultProgressbar(){
-        progressBar.setMax(9);
+        progressBar.setMax(Package.getMaxLevel());
         progressBar.setProgress(progressStatus);
-        textView.setText(progressStatus + "/" + progressBar.getMax());
+        progressText.setText(progressStatus + "/" + progressBar.getMax());
     }
 
     private void initLevel(TextView view){
-        String nextEntry = Package.getSpeechString(Package.getCurrentLevel(),Package.Data);
+        String nextEntry = Package.getSpeechString(Package.getCurrentLevel());
         if (nextEntry == "MODE_FINISHED"){
             finishMode();
         }

@@ -29,9 +29,9 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
     TextToSpeech t1;
     TextView textToRead;
     private ProgressBar progressBar;
-    private int progressStatus = 0;
+    private int progressStatus;
     private Handler handler = new Handler();
-    private TextView textView;
+    private TextView progressText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,9 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             setContentView(R.layout.activity_listen_and_repeat);
             textToRead = (TextView) findViewById(R.id.textToRead);
             progressBar = (ProgressBar) findViewById(R.id.progressBar);
-            textView = (TextView) findViewById(R.id.textView1);
-            Package = new Data("ListenAndRepeat");
+            progressText = (TextView) findViewById(R.id.textView1);
+            Package = new Data("ListenAndRepeat", 5);
+            progressStatus = 0;
 
             initLevel(textToRead);
 
@@ -56,7 +57,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         }
         // Start long running operation in a background thread
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        textView = (TextView) findViewById(R.id.textView1);
+        progressText = (TextView) findViewById(R.id.textView1);
         progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#ffd600"), PorterDuff.Mode.SRC_IN);
         defaultProgressbar();
 
@@ -105,31 +106,30 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("You said: ");
                 stringBuilder.append(speech);
-                stringBuilder.append(". Incorrect. Try again!");
+                stringBuilder.append(". Incorrect.");
                 String output = stringBuilder.toString();
                 outputText.setText(output);
                 Package.incrementLevel(outcome);
                 initLevel(textToRead);
-                incProgress();
             }
-
+            incProgress();
             //((TextView)findViewById(R.id.text1)).setText(thingsYouSaid.get(0));
         }
     }
 
 // ProgressBar logic
     public void incProgress() {
-        progressBar.setMax(4);
+        progressBar.setMax(Package.getMaxLevel());
         new Thread(new Runnable() {
             public void run() {
-                if (progressStatus < 5) {
+                if (progressStatus < progressBar.getMax()+1) {
                     progressStatus += 1;
                     // Update the progress bar and display the
                     //current value in the text view
                     handler.post(new Runnable() {
                         public void run() {
                             progressBar.setProgress(progressStatus);
-                            textView.setText(progressStatus + "/" + progressBar.getMax());
+                            progressText.setText(progressStatus + "/" + progressBar.getMax());
                         }
                     });
                     try {
@@ -144,9 +144,9 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         }).start();
     }
 public void defaultProgressbar(){
-    progressBar.setMax(4);
+    progressBar.setMax(Package.getMaxLevel());
     progressBar.setProgress(progressStatus);
-    textView.setText(progressStatus + "/" + progressBar.getMax());
+    progressText.setText(progressStatus + "/" + progressBar.getMax());
 }
     public String getData(){
        TextView textToRead = (TextView) findViewById(R.id.textToRead);
@@ -167,7 +167,7 @@ public void defaultProgressbar(){
     }
 
     private void initLevel(TextView view){
-        String nextEntry = Package.getSpeechString(Package.getCurrentLevel(), Package.Data);
+        String nextEntry = Package.getSpeechString(Package.getCurrentLevel());
         if (nextEntry == "MODE_FINISHED"){
             finishMode();
         }
