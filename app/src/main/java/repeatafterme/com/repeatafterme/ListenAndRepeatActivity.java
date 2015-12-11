@@ -2,11 +2,15 @@ package repeatafterme.com.repeatafterme;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +28,10 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
     protected static final int REQUEST_OK = 1;
     TextToSpeech t1;
     TextView textToRead;
+    private ProgressBar progressBar;
+    private int progressStatus = 0;
+    private Handler handler = new Handler();
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,8 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_listen_and_repeat);
             textToRead = (TextView) findViewById(R.id.textToRead);
+            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            textView = (TextView) findViewById(R.id.textView1);
             Package = new Data("ListenAndRepeat");
 
             initLevel(textToRead);
@@ -44,9 +54,12 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "There was an error initializing the mode you selected", Toast.LENGTH_SHORT).show();
         }
+        // Start long running operation in a background thread
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        textView = (TextView) findViewById(R.id.textView1);
+        progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#ffd600"), PorterDuff.Mode.SRC_IN);
 
-
-    }
+            }
 
     protected void createTextToSpeech(){
     t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
@@ -96,13 +109,41 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
                 outputText.setText(output);
                 Package.incrementLevel(outcome);
                 initLevel(textToRead);
+                incProgress();
             }
 
             //((TextView)findViewById(R.id.text1)).setText(thingsYouSaid.get(0));
         }
     }
 
-   public String getData(){
+// ProgressBar logic
+    public void incProgress() {
+        progressBar.setMax(4);
+        new Thread(new Runnable() {
+            public void run() {
+                if (progressStatus < 5) {
+                    progressStatus += 1;
+                    // Update the progress bar and display the
+                    //current value in the text view
+                    handler.post(new Runnable() {
+                        public void run() {
+                            progressBar.setProgress(progressStatus);
+                            textView.setText(progressStatus + "/" + progressBar.getMax());
+                        }
+                    });
+                    try {
+                        // Sleep for 200 milliseconds.
+                        //Just to display the progress slowly
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public String getData(){
        TextView textToRead = (TextView) findViewById(R.id.textToRead);
        String textAsString = (String) textToRead.getText();
        return textAsString;
@@ -117,7 +158,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         }catch(Exception e){
             Toast.makeText(this, "Error initializing talk text engine.", Toast.LENGTH_LONG).show();
         }
-        
+
     }
 
     private void initLevel(TextView view){

@@ -57,18 +57,19 @@
         android:text=""
         android:layout_gravity="center"
         android:layout_marginTop="29dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         >
     </TextView>
+
 
     <Button
         style="@style/primary_button"
         android:id="@+id/speak_to_me"
         android:text=" Vorsprechen"
         android:drawableLeft="@android:drawable/ic_lock_silent_mode_off"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
         android:onClick="talkText" />
-
 
     <android.support.design.widget.FloatingActionButton
         style="@style/speak_button"
@@ -84,7 +85,27 @@
         android:layout_height="wrap_content"
         android:text="..."
         android:layout_alignTop="@+id/button1"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="55dp"></TextView>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_gravity="center_horizontal"
+        android:max="100"
+        android:minHeight="50dp"
+        android:minWidth="200dp"
+        android:indeterminate="false"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/progressBar1"
+        android:layout_below="@+id/progressBar1"
+        android:layout_gravity="center_horizontal"
+        />
 
 </LinearLayout>

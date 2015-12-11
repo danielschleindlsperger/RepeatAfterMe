@@ -86,4 +86,24 @@
         android:layout_gravity="center"
         android:layout_marginTop="55dp"></TextView>
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar2"
+        android:layout_gravity="center_horizontal"
+        android:max="100"
+        android:minHeight="50dp"
+        android:minWidth="200dp"
+        android:indeterminate="false"/>
+
+    <TextView
+        android:id="@+id/read_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/progressBar1"
+        android:layout_below="@+id/progressBar1"
+        android:layout_gravity="center_horizontal"
+        />
+
 </LinearLayout>
