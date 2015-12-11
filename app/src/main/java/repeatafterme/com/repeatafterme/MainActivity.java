@@ -27,44 +27,51 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Show login view first. After successful login show main view
-        setContentView(R.layout.login);
-        // Set username and password input hints
-        final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
-        final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
-        usernameWrapper.setHint("Username");
-        passwordWrapper.setHint("Password");
+        // Get view that is to be display through intent message
+        // DOES NOT WORK AS OF NOW!!!!
+        Intent viewIntent = getIntent();
+        String view = viewIntent.getStringExtra(ListenAndRepeatActivity.VIEW);
+        if (view == "main"){
+            setContentView(R.layout.activity_main);
+        }else {
+            setContentView(R.layout.login);
 
-        // Button onclick bind
-        final Button loginbtn = (Button) findViewById(R.id.loginbtn);
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideKeyboard();
+            // Set username and password input hints
+            final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+            final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
+            usernameWrapper.setHint("Username");
+            passwordWrapper.setHint("Password");
 
-                // Get username and password input
-                String username = usernameWrapper.getEditText().getText().toString();
-                String password = passwordWrapper.getEditText().getText().toString();
+            // Button onclick bind
+            final Button loginBtn = (Button) findViewById(R.id.loginbtn);
+            loginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    hideKeyboard();
 
-                Log.d("username", username);
-                Log.d("password", password);
+                    // Get username and password input
+                    String username = usernameWrapper.getEditText().getText().toString();
+                    String password = passwordWrapper.getEditText().getText().toString();
 
-                // User and password validation
-                if (!validateUser(username)) {
-                    usernameWrapper.setError("Not a valid username! At least 6 characters required.");
-                } else if (!validatePassword(password)) {
-                    passwordWrapper.setError("Not a valid password! At least 6 characters required.");
-                } else {
-                    usernameWrapper.setErrorEnabled(false);
-                    passwordWrapper.setErrorEnabled(false);
-                    doLogin();
-                    welcomeMessage(username);
+                    Log.d("username", username);
+                    Log.d("password", password);
+
+                    // User and password validation
+                    if (!validateUser(username)) {
+                        usernameWrapper.setError("Not a valid username! At least 6 characters required.");
+                    } else if (!validatePassword(password)) {
+                        passwordWrapper.setError("Not a valid password! At least 6 characters required.");
+                    } else {
+                        usernameWrapper.setErrorEnabled(false);
+                        passwordWrapper.setErrorEnabled(false);
+                        doLogin();
+                        welcomeMessage(username);
+                    }
                 }
-            }
-        });
-
+            });
 
         }
+    }
 
     // Hide Android keyboard if no view in focus
     private void hideKeyboard() {

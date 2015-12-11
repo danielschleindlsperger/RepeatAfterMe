@@ -24,6 +24,7 @@ This class represents the view and logic for the first game mode, where the user
 Shared logic with other modes will be placed in the Engine.class
  */
 public class ListenAndRepeatActivity extends Activity implements View.OnClickListener {
+    public final static String VIEW = "repeatafterme.com.repeatafterme.VIEWTOLOAD";
     Engine Engine;
     Data Package;
     protected static final int REQUEST_OK = 1;
@@ -192,7 +193,9 @@ public void defaultProgressbar(){
     // Onclick event to return to main view after finishing a game mode
     View.OnClickListener confirmListener = new View.OnClickListener(){
         public void onClick(View v){
-            setContentView(R.layout.activity_main);
+            Intent finished = new Intent(getApplicationContext(), MainActivity.class);
+            finished.putExtra(VIEW, "main");
+            startActivity(finished);
         }
     };
 }
