@@ -41,6 +41,8 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_read_and_repeat);
             textToRead = (TextView) findViewById(R.id.textToRead);
+
+            // Get Package with game mode speech data, set levels of mode
             Package = new Data("ReadAndRepeat", 1);
             progressStatus = 0;
             initLevel(textToRead);

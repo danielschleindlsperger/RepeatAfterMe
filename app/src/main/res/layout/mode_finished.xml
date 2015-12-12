@@ -32,14 +32,13 @@
         android:gravity="center"/>
 
     <Button
-        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="AWESOME!"
-        android:textColor="@color/colorAccent"
+        android:textColor="#FFFFFF"
         android:id="@+id/confirm_finish"
-        android:background="#00000000"
+        android:background="@color/colorAccent"
         android:layout_gravity="center_horizontal" />
 
     <ImageView

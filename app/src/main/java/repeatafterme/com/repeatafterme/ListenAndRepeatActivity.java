@@ -45,6 +45,8 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             textToRead = (TextView) findViewById(R.id.textToRead);
             progressBar = (ProgressBar) findViewById(R.id.progressBar);
             progressText = (TextView) findViewById(R.id.textView1);
+
+            // Get Package with game mode speech data, set levels of mode
             Package = new Data("ListenAndRepeat", 1);
             progressStatus = 0;
 
