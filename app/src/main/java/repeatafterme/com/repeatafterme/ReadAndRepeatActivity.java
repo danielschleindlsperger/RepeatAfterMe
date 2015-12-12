@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +28,9 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
     Engine Engine;
     protected static final int REQUEST_OK = 1;
     TextView textToRead;
+    TextView EndTxt;
     private ProgressBar progressBar;
+    private ImageView EndImg;
     private int progressStatus;
     private Handler handler = new Handler();
     private TextView progressText;
@@ -41,6 +45,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_read_and_repeat);
             textToRead = (TextView) findViewById(R.id.textToRead);
+
 
             // Get Package with game mode speech data, set levels of mode
             Package = new Data("ReadAndRepeat", 1);
@@ -175,5 +180,27 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
 
         correct.setText("Correct Answers: " + corrects);
         incorrect.setText("Incorrect Answers: " + incorrects);
+        setImg();
+    }
+    public void setImg(){
+        EndImg = (ImageView) findViewById(R.id.congrats_image);
+        EndTxt = (TextView) findViewById(R.id.congrats_heading);
+        int corrects = Package.getCorrect();
+        int incorrects = Package.getIncorrect();
+        if (incorrects == 0){
+
+            EndImg.setImageResource(R.drawable.epicmeme);
+            EndTxt.setText("Perfect! You have a very good pronunciation");
+        }else if (corrects > incorrects){
+            EndImg.setImageResource(R.drawable.speak);
+            EndTxt.setText("Good job!");
+        }else if (corrects <= incorrects){
+            EndImg.setImageResource(R.drawable.write);
+            EndTxt.setText("Not bad! Try to pronounce very clearly");
+        }else if(corrects == 0){
+            EndImg.setImageResource(R.drawable.notizblatt_klein);
+            EndTxt.setText("Try again! Training is everything");
+        }
+
     }
 }

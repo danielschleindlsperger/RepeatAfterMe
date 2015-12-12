@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
     protected static final int REQUEST_OK = 1;
     TextToSpeech t1;
     TextView textToRead;
+    TextView EndTxt;
+    private ImageView EndImg;
     private ProgressBar progressBar;
     private int progressStatus;
     private Handler handler = new Handler();
@@ -212,5 +215,28 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
 
         correct.setText("Correct Answers: " + corrects);
         incorrect.setText("Incorrect Answers: " + incorrects);
+        setImg();
     }
+    public void setImg(){
+        EndImg = (ImageView) findViewById(R.id.congrats_image);
+        EndTxt = (TextView) findViewById(R.id.congrats_heading);
+        int corrects = Package.getCorrect();
+        int incorrects = Package.getIncorrect();
+        if (incorrects == 0){
+
+            EndImg.setImageResource(R.drawable.epicmeme);
+            EndTxt.setText("Perfect! You have a very good pronunciation");
+        }else if (corrects > incorrects){
+            EndImg.setImageResource(R.drawable.speak);
+            EndTxt.setText("Good job!");
+        }else if (corrects <= incorrects){
+            EndImg.setImageResource(R.drawable.write);
+            EndTxt.setText("Not bad! Try to pronounce very clearly");
+        }else if(corrects == 0){
+            EndImg.setImageResource(R.drawable.notizblatt_klein);
+            EndTxt.setText("Try again! Training is everything");
+        }
+
+    }
+
 }
