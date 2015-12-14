@@ -48,7 +48,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
 
 
             // Get Package with game mode speech data, set levels of mode
-            Package = new Data("ReadAndRepeat", 1);
+            Package = new Data("ReadAndRepeat", 4);
             progressStatus = 0;
             initLevel(textToRead);
 
@@ -190,13 +190,13 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         if (incorrects == 0){
 
             EndImg.setImageResource(R.drawable.epicmeme);
-            EndTxt.setText("Perfect! You have a very good pronunciation");
+            EndTxt.setText("Perfect! You have got a very good pronunciation");
         }else if (corrects > incorrects){
             EndImg.setImageResource(R.drawable.speak);
             EndTxt.setText("Good job!");
-        }else if (corrects <= incorrects){
+        }else if (corrects <= incorrects && corrects != 0){
             EndImg.setImageResource(R.drawable.write);
-            EndTxt.setText("Not bad! Try to pronounce very clearly");
+            EndTxt.setText("Not bad! Try to pronounce more clearly");
         }else if(corrects == 0){
             EndImg.setImageResource(R.drawable.notizblatt_klein);
             EndTxt.setText("Try again! Training is everything");

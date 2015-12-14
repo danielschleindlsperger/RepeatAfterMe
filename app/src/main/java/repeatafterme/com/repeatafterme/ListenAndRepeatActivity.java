@@ -50,7 +50,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             progressText = (TextView) findViewById(R.id.textView1);
 
             // Get Package with game mode speech data, set levels of mode
-            Package = new Data("ListenAndRepeat", 1);
+            Package = new Data("ListenAndRepeat", 4);
             progressStatus = 0;
 
             initLevel(textToRead);
@@ -229,7 +229,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         }else if (corrects > incorrects){
             EndImg.setImageResource(R.drawable.speak);
             EndTxt.setText("Good job!");
-        }else if (corrects <= incorrects){
+        }else if (corrects <= incorrects && corrects != 0){
             EndImg.setImageResource(R.drawable.write);
             EndTxt.setText("Not bad! Try to pronounce very clearly");
         }else if(corrects == 0){
