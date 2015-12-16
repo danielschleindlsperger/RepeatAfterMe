@@ -85,12 +85,12 @@ public class Data {
     // Add entries for Read and Repeat game mode
     private void initReadAndRepeat(){
         Data.add("Hello");
-        Data.add("Dog");
+        Data.add("Window");
         Data.add("Blue");
         Data.add("Chair");
         Data.add("Desk");
+        Data.add("Dog");
         Data.add("Tree");
-        Data.add("Window");
         Data.add("School");
         Data.add("A tree has many leaves");
         //Data.add("Stupid answer");

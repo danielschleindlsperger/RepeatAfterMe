@@ -49,4 +49,5 @@
         android:src="@drawable/epicmeme"
         android:id="@+id/congrats_image"
         android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

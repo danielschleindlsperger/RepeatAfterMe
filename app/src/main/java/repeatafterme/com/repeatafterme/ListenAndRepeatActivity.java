@@ -50,7 +50,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             progressText = (TextView) findViewById(R.id.textView1);
 
             // Get Package with game mode speech data, set levels of mode
-            Package = new Data("ListenAndRepeat", 10);
+            Package = new Data("ListenAndRepeat",10);
             progressStatus = 0;
 
             initLevel(textToRead);
@@ -218,28 +218,28 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
 
         correct.setText("Richtige Antworten: " + corrects);
         incorrect.setText("Falsche Antworten: " + incorrects);
-        //setImg();
+        setImg();
     }
-//    public void setImg(){
-//        EndImg = (ImageView) findViewById(R.id.congrats_image);
-//        EndTxt = (TextView) findViewById(R.id.congrats_heading);
-//        int corrects = Package.getCorrect();
-//        int incorrects = Package.getIncorrect();
-//        if (incorrects == 0){
-//
-//            EndImg.setImageResource(R.drawable.epicmeme);
-//            EndTxt.setText("Perfect! You have a very good pronunciation");
-//        }else if (corrects > incorrects){
-//            EndImg.setImageResource(R.drawable.speak);
-//            EndTxt.setText("Good job!");
-//        }else if (corrects <= incorrects && corrects != 0){
-//            EndImg.setImageResource(R.drawable.write);
-//            EndTxt.setText("Not bad! Try to pronounce very clearly");
-//        }else if(corrects == 0){
-//            EndImg.setImageResource(R.drawable.notizblatt_klein);
-//            EndTxt.setText("Try again! Training is everything");
-//        }
-//
-//    }
+    public void setImg(){
+        EndImg = (ImageView) findViewById(R.id.congrats_image);
+        EndTxt = (TextView) findViewById(R.id.congrats_heading);
+        int corrects = Package.getCorrect();
+        int incorrects = Package.getIncorrect();
+        if (incorrects == 0){
+
+    EndImg.setImageResource(R.drawable.thumb_up_gold);
+    EndTxt.setText("Perfekt! Du sprichst die Wörter sehr deutlich aus");
+}else if (corrects > incorrects){
+        EndImg.setImageResource(R.drawable.thumb_up);
+        EndTxt.setText("Gute Arbeit!");
+        }else if (corrects <= incorrects && corrects != 0){
+        EndImg.setImageResource(R.drawable.thumb_right);
+        EndTxt.setText("Nicht Schlecht! Versuch die Wörte klarer auszusprechen");
+        }else if(corrects == 0){
+        EndImg.setImageResource(R.drawable.thumb_down);
+        EndTxt.setText("Versuch es noch einmal! Training ist alles");
+        }
+
+    }
 
 }

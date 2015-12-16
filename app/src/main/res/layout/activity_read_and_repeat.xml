@@ -56,9 +56,11 @@
         android:id="@+id/textToReadDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Read the following Text"
+        android:text="Drücke auf das Mikrofon um den folgenden Text vorzulesen."
         android:layout_gravity="center"
-        android:layout_marginTop="29dp"></TextView>
+        android:layout_marginTop="29dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"></TextView>
 
     <TextView
         android:id="@+id/textToRead"
