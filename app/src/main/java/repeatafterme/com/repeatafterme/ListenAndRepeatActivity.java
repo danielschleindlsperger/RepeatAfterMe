@@ -50,7 +50,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             progressText = (TextView) findViewById(R.id.textView1);
 
             // Get Package with game mode speech data, set levels of mode
-            Package = new Data("ListenAndRepeat", 4);
+            Package = new Data("ListenAndRepeat", 10);
             progressStatus = 0;
 
             initLevel(textToRead);
@@ -60,7 +60,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             createTextToSpeech();
         }catch(Exception e){
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "There was an error initializing the mode you selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Es gab einen Fehler beim Initialisieren des gewählten Modus", Toast.LENGTH_SHORT).show();
         }
 
         // Start long running operation in a background thread
@@ -80,7 +80,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
                 t1.setLanguage(Locale.UK);
             }
             else {
-                Toast.makeText(getApplicationContext(), "Sorry, there was an error initializing the speech engine", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
             }
         }
     });
@@ -94,7 +94,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             startActivityForResult(i, REQUEST_OK);
 
         } catch (Exception e) {
-            Toast.makeText(this, "Error initializing speech to text engine.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Fehler beim Initialisieren der Sprachengine.", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -109,13 +109,16 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             String speech = thingsYouSaid.get(0).toString();
             Boolean outcome = Engine.checkSpeech(textToRead, speech);
             if(outcome){
+                recognizedText.setText("Richtig. Sehr gut!");
+                Toast.makeText(getApplicationContext(),"Richtig. Sehr gut!", Toast.LENGTH_SHORT);
                 Package.incrementLevel(outcome);
                 initLevel(textToRead);
             }else{
+                Toast.makeText(getApplicationContext(),"Leider falsch.", Toast.LENGTH_SHORT);
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("You said: ");
+                stringBuilder.append("Du hast gesagt: ");
                 stringBuilder.append(speech);
-                stringBuilder.append(". Incorrect.");
+                stringBuilder.append(". Leider falsch!");
                 String output = stringBuilder.toString();
                 recognizedText.setText(output);
                 Package.incrementLevel(outcome);
@@ -170,7 +173,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         try {
             t1.speak(data, TextToSpeech.QUEUE_FLUSH, null);
         }catch(Exception e){
-            Toast.makeText(this, "Error initializing talk text engine.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Fehler beim Initialisieren der Sprachengine.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -193,7 +196,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         setScoreboard();
         int corrects = Package.getCorrect();
         int incorrects = Package.getIncorrect();
-        Toast.makeText(getApplicationContext(), "Mode complete! Congrats!\n Correct: " + corrects + "\n Incorrect: " + incorrects, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Mode complete! Congrats!\n Correct: " + corrects + "\n Incorrect: " + incorrects, Toast.LENGTH_SHORT).show();
     }
 
     // Onclick event to return to main view after finishing a game mode
@@ -213,30 +216,30 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         TextView correct = (TextView) findViewById(R.id.finish_correct);
         TextView incorrect = (TextView) findViewById(R.id.finish_incorrect);
 
-        correct.setText("Correct Answers: " + corrects);
-        incorrect.setText("Incorrect Answers: " + incorrects);
-        setImg();
+        correct.setText("Richtige Antworten: " + corrects);
+        incorrect.setText("Falsche Antworten: " + incorrects);
+        //setImg();
     }
-    public void setImg(){
-        EndImg = (ImageView) findViewById(R.id.congrats_image);
-        EndTxt = (TextView) findViewById(R.id.congrats_heading);
-        int corrects = Package.getCorrect();
-        int incorrects = Package.getIncorrect();
-        if (incorrects == 0){
-
-            EndImg.setImageResource(R.drawable.epicmeme);
-            EndTxt.setText("Perfect! You have a very good pronunciation");
-        }else if (corrects > incorrects){
-            EndImg.setImageResource(R.drawable.speak);
-            EndTxt.setText("Good job!");
-        }else if (corrects <= incorrects && corrects != 0){
-            EndImg.setImageResource(R.drawable.write);
-            EndTxt.setText("Not bad! Try to pronounce very clearly");
-        }else if(corrects == 0){
-            EndImg.setImageResource(R.drawable.notizblatt_klein);
-            EndTxt.setText("Try again! Training is everything");
-        }
-
-    }
+//    public void setImg(){
+//        EndImg = (ImageView) findViewById(R.id.congrats_image);
+//        EndTxt = (TextView) findViewById(R.id.congrats_heading);
+//        int corrects = Package.getCorrect();
+//        int incorrects = Package.getIncorrect();
+//        if (incorrects == 0){
+//
+//            EndImg.setImageResource(R.drawable.epicmeme);
+//            EndTxt.setText("Perfect! You have a very good pronunciation");
+//        }else if (corrects > incorrects){
+//            EndImg.setImageResource(R.drawable.speak);
+//            EndTxt.setText("Good job!");
+//        }else if (corrects <= incorrects && corrects != 0){
+//            EndImg.setImageResource(R.drawable.write);
+//            EndTxt.setText("Not bad! Try to pronounce very clearly");
+//        }else if(corrects == 0){
+//            EndImg.setImageResource(R.drawable.notizblatt_klein);
+//            EndTxt.setText("Try again! Training is everything");
+//        }
+//
+//    }
 
 }

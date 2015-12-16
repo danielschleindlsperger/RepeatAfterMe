@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Get view that is to be display through intent message
-        // DOES NOT WORK AS OF NOW!!!!
+        // Set view to main instead of login based on intent extra
         Intent viewIntent = getIntent();
         String view = viewIntent.getStringExtra("VIEW");
 
@@ -40,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
             // Set username and password input hints
             final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
             final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
-            usernameWrapper.setHint("Username");
-            passwordWrapper.setHint("Password");
+            usernameWrapper.setHint("Benutzername");
+            passwordWrapper.setHint("Passwort");
 
             // Button onclick bind
             final Button loginBtn = (Button) findViewById(R.id.loginbtn);
@@ -59,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
                     // User and password validation
                     if (!validateUser(username)) {
-                        usernameWrapper.setError("Not a valid username! At least 6 characters required.");
+                        usernameWrapper.setError("Kein gültiger Benutzername. Mindestens 6 Zeichen benötigt.");
                     } else if (!validatePassword(password)) {
-                        passwordWrapper.setError("Not a valid password! At least 6 characters required.");
+                        passwordWrapper.setError("Kein gültiges Passwort. Mindestens 6 Zeichen benötigt.");
                     } else {
                         usernameWrapper.setErrorEnabled(false);
                         passwordWrapper.setErrorEnabled(false);
@@ -98,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
     private void welcomeMessage(String user) {
         final TextView welcomeText = (TextView) findViewById(R.id.text_welcome);
         welcomeText.setText(
-                "Welcome " + user + "! What do you want to do?");
+                "Hallo " + user + "! Was willst du machen?");
     }
 
     private void doLogin(){
-        Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login erfolgreich!", Toast.LENGTH_SHORT).show();
 
         // Setup main view
         createMainView();

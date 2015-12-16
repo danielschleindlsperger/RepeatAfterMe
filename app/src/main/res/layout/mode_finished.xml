@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Congratulations!\nYou did it!"
+        android:text="Glückwunsch!\nDu hast es geschafft!"
         android:id="@+id/congrats_heading"
         android:layout_gravity="center_horizontal"
         android:gravity="center"/>
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="15sp"
-        android:text="Correct answers:"
+        android:text="Richtige Antworten:"
         android:id="@+id/finish_correct"
         android:layout_gravity="center"
         android:gravity="center"/>
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="15sp"
-        android:text="Incorrect answers:"
+        android:text="Falsche Antworten:"
         android:id="@+id/finish_incorrect"
         android:layout_gravity="center"
         android:gravity="center"/>
@@ -35,7 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="AWESOME!"
+        android:text="Hauptmenü"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textColor="#FFFFFF"
         android:id="@+id/confirm_finish"
         android:background="@color/colorAccent"

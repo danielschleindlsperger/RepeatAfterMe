@@ -48,7 +48,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
 
 
             // Get Package with game mode speech data, set levels of mode
-            Package = new Data("ReadAndRepeat", 4);
+            Package = new Data("ReadAndRepeat", 10);
             progressStatus = 0;
             initLevel(textToRead);
 
@@ -57,7 +57,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
 
         }catch(Exception e){
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "There was an error initializing the mode you selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Es gab einen Fehler beim Initialisieren des gewählten Modus", Toast.LENGTH_SHORT).show();
         }
 
         // Start long running operation in a background thread
@@ -76,7 +76,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         try {
             startActivityForResult(i, REQUEST_OK);
         } catch (Exception e) {
-            Toast.makeText(this, "Error initializing speech to text engine.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Fehler beim Initialisieren der Sprachengine.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -90,14 +90,16 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
             String speech = thingsYouSaid.get(0).toString();
             Boolean outcome = Engine.checkSpeech(textToRead, speech);
             if(outcome){
-                outputText.setText("Correct. Very good!");
+                Toast.makeText(getApplicationContext(),"Richtig. Sehr gut!", Toast.LENGTH_SHORT).show();
+                outputText.setText("Richtig. Sehr gut!");
                 Package.incrementLevel(outcome);
                 initLevel(textToRead);
             }else{
+                Toast.makeText(getApplicationContext(),"Leider falsch.", Toast.LENGTH_SHORT).show();
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("You said: ");
+                stringBuilder.append("Du hast gesagt: ");
                 stringBuilder.append(speech);
-                stringBuilder.append(". Incorrect.");
+                stringBuilder.append(". Leider falsch!");
                 String output = stringBuilder.toString();
                 outputText.setText(output);
                 Package.incrementLevel(outcome);
@@ -158,7 +160,7 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         setScoreboard();
         int corrects = Package.getCorrect();
         int incorrects = Package.getIncorrect();
-        Toast.makeText(getApplicationContext(), "Mode complete! Congrats!\n Correct: " + corrects + "\n Incorrect: " + incorrects, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Mode complete! Congrats!\n Correct: " + corrects + "\n Incorrect: " + incorrects, Toast.LENGTH_SHORT).show();
     }
 
     // Onclick event to return to main view after finishing a game mode
@@ -178,29 +180,29 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         TextView correct = (TextView) findViewById(R.id.finish_correct);
         TextView incorrect = (TextView) findViewById(R.id.finish_incorrect);
 
-        correct.setText("Correct Answers: " + corrects);
-        incorrect.setText("Incorrect Answers: " + incorrects);
-        setImg();
+        correct.setText("Richtige Antworten: " + corrects);
+        incorrect.setText("Falsche Antworten: " + incorrects);
+        //setImg();
     }
-    public void setImg(){
-        EndImg = (ImageView) findViewById(R.id.congrats_image);
-        EndTxt = (TextView) findViewById(R.id.congrats_heading);
-        int corrects = Package.getCorrect();
-        int incorrects = Package.getIncorrect();
-        if (incorrects == 0){
-
-            EndImg.setImageResource(R.drawable.epicmeme);
-            EndTxt.setText("Perfect! You have got a very good pronunciation");
-        }else if (corrects > incorrects){
-            EndImg.setImageResource(R.drawable.speak);
-            EndTxt.setText("Good job!");
-        }else if (corrects <= incorrects && corrects != 0){
-            EndImg.setImageResource(R.drawable.write);
-            EndTxt.setText("Not bad! Try to pronounce more clearly");
-        }else if(corrects == 0){
-            EndImg.setImageResource(R.drawable.notizblatt_klein);
-            EndTxt.setText("Try again! Training is everything");
-        }
-
-    }
+//    public void setImg(){
+//        EndImg = (ImageView) findViewById(R.id.congrats_image);
+//        EndTxt = (TextView) findViewById(R.id.congrats_heading);
+//        int corrects = Package.getCorrect();
+//        int incorrects = Package.getIncorrect();
+//        if (incorrects == 0){
+//
+//            EndImg.setImageResource(R.drawable.epicmeme);
+//            EndTxt.setText("Perfect! You have got a very good pronunciation");
+//        }else if (corrects > incorrects){
+//            EndImg.setImageResource(R.drawable.speak);
+//            EndTxt.setText("Good job!");
+//        }else if (corrects <= incorrects && corrects != 0){
+//            EndImg.setImageResource(R.drawable.write);
+//            EndTxt.setText("Not bad! Try to pronounce more clearly");
+//        }else if(corrects == 0){
+//            EndImg.setImageResource(R.drawable.notizblatt_klein);
+//            EndTxt.setText("Try again! Training is everything");
+//        }
+//
+//    }
 }

@@ -70,9 +70,9 @@ public class Data {
 
     // Add entries for Listen and Repeat game mode
     private void initListenAndRepeat(){
-        Data.add("Hello");
-        Data.add("Test");
-        Data.add("Water");
+        Data.add("Pencil");
+        Data.add("Teacher");
+        Data.add("January");
         Data.add("Team");
         Data.add("People");
         Data.add("Map");
@@ -85,24 +85,15 @@ public class Data {
     // Add entries for Read and Repeat game mode
     private void initReadAndRepeat(){
         Data.add("Hello");
-        Data.add("Test");
-        Data.add("Water");
-        Data.add("House");
+        Data.add("Dog");
+        Data.add("Blue");
+        Data.add("Chair");
         Data.add("Desk");
         Data.add("Tree");
+        Data.add("Window");
+        Data.add("School");
         Data.add("A tree has many leaves");
-//        ReadAndRepeat.add("Roberta ran rings around the Roman ruins.");
-        Data.add("Stupid answer");
+        //Data.add("Stupid answer");
         Data.add("If you want respect you have to earn it");
-    }
-
-
-    public static int randInt(int min, int max) {
-
-        Random rand = new Random();
-
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-
-        return randomNum;
     }
 }

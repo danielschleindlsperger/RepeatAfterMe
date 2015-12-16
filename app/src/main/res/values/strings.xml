@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">RepeatAfterMe</string>
-    <string name="welcome">Welcome User What do you want to do?</string>
+    <string name="welcome">Was willst du machen?</string>
 </resources>
