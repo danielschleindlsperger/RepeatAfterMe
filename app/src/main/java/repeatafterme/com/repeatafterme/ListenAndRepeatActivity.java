@@ -110,11 +110,11 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
             Boolean outcome = Engine.checkSpeech(textToRead, speech);
             if(outcome){
                 recognizedText.setText("Richtig. Sehr gut!");
-                Toast.makeText(getApplicationContext(),"Richtig. Sehr gut!", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(),"Richtig. Sehr gut!", Toast.LENGTH_SHORT).show();
                 Package.incrementLevel(outcome);
                 initLevel(textToRead);
             }else{
-                Toast.makeText(getApplicationContext(),"Leider falsch.", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(),"Leider falsch.", Toast.LENGTH_SHORT).show();
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append("Du hast gesagt: ");
                 stringBuilder.append(speech);
