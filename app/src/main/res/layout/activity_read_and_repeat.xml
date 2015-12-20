@@ -13,12 +13,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        cardview:cardElevation="4dp"
+        cardview:cardElevation="2dp"
         cardview:cardCornerRadius="4dp"
         android:tag="ListenAndRepeat"
         android:id="@+id/cardView"
         >
-
 
         <RelativeLayout
             android:layout_alignParentTop="true"
@@ -53,31 +52,23 @@
     </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/textToReadDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Drücke auf das Mikrofon um den folgenden Text vorzulesen."
-        android:layout_gravity="center"
-        android:layout_marginTop="29dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"></TextView>
-
-    <TextView
         android:id="@+id/textToRead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="test"
+        android:textSize="20sp"
         android:layout_gravity="center"
-        android:layout_marginTop="29dp">
+        android:layout_marginTop="29dp"
+        android:background="@drawable/rounded_corner"
+        android:textColor="#111111"
+        android:elevation="2dp">
     </TextView>
-
 
     <android.support.design.widget.FloatingActionButton
         style="@style/speak_button"
         android:id="@+id/button1"
         android:layout_marginTop="78dp"
         ></android.support.design.widget.FloatingActionButton>
-
 
     <TextView
         android:id="@+id/text1"

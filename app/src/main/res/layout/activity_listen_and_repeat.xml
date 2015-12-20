@@ -1,119 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/notizblatt_klein"
-    android:orientation="vertical">
+    tools:context=".ListenAndRepeatActivity">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        cardview:cardElevation="4dp"
-        cardview:cardCornerRadius="4dp"
-        android:tag="ListenAndRepeat"
-        android:id="@+id/view"
-        >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:cardview="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/notizblatt_klein"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_alignParentTop="true"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:padding="15dp"
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            cardview:cardElevation="2dp"
+            cardview:cardCornerRadius="4dp"
+            android:tag="ListenAndRepeat"
+            android:id="@+id/view"
             >
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/listen_and_repeat_photo"
-                android:layout_marginRight="20dp"
+
+            <RelativeLayout
                 android:layout_alignParentTop="true"
-                android:src="@drawable/speak"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:padding="15dp"
+                >
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/listen_and_repeat_photo"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/speak"
+                    />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:id="@+id/listen_and_repeat_title"
-                android:textSize="25sp"
-                android:gravity="center"
-                android:text="Listen &amp; Repeat"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="28dp"
-                android:layout_marginStart="28dp" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/listen_and_repeat_title"
+                    android:textSize="25sp"
+                    android:gravity="center"
+                    android:text="Listen &amp; Repeat"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginStart="28dp" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wenn du auf &quot;Vorsprechen&quot; klickst wird dir das aktuelle Wort vorgelesen. Um es selbst zu wiederholen drücke auf das Mikrofon."
-        android:id="@+id/textView"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp" />
-
-    <TextView
-        android:id="@+id/textToRead"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_gravity="center"
-        android:layout_marginTop="29dp"
-        android:visibility="invisible"
-        >
-    </TextView>
+        <TextView
+            android:id="@+id/textToRead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="center"
+            android:layout_marginTop="29dp"
+            android:visibility="invisible"
+            >
+        </TextView>
 
 
-    <Button
-        style="@style/primary_button"
-        android:id="@+id/speak_to_me"
-        android:text=" Vorsprechen"
-        android:drawableLeft="@android:drawable/ic_lock_silent_mode_off"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
-        android:onClick="talkText" />
+        <Button
+            style="@style/primary_button"
+            android:id="@+id/speak_to_me"
+            android:text=" Vorsprechen"
+            android:drawableLeft="@android:drawable/ic_lock_silent_mode_off"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:onClick="talkText" />
 
-    <android.support.design.widget.FloatingActionButton
-        style="@style/speak_button"
-        android:id="@+id/button1"
-        android:layout_marginTop="78dp"
-        android:layout_gravity="center_horizontal">
-    </android.support.design.widget.FloatingActionButton
-        >
+        <android.support.design.widget.FloatingActionButton
+            style="@style/speak_button"
+            android:id="@+id/button1"
+            android:layout_marginTop="78dp"
+            android:layout_gravity="center_horizontal">
+        </android.support.design.widget.FloatingActionButton
+            >
 
-    <TextView
-        android:id="@+id/recognized_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="..."
-        android:layout_alignTop="@+id/button1"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="55dp"></TextView>
+        <TextView
+            android:id="@+id/recognized_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:layout_alignTop="@+id/button1"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="55dp"></TextView>
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_gravity="center_horizontal"
-        android:max="100"
-        android:minHeight="50dp"
-        android:minWidth="200dp"
-        android:indeterminate="false"/>
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:layout_gravity="center_horizontal"
+            android:max="100"
+            android:minHeight="50dp"
+            android:minWidth="200dp"
+            android:indeterminate="false"/>
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/progressBar1"
-        android:layout_below="@+id/progressBar1"
-        android:layout_gravity="center_horizontal"
-        />
-
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/progressBar1"
+            android:layout_below="@+id/progressBar1"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

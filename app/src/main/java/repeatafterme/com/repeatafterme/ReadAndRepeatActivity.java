@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.os.Bundle;
@@ -65,6 +66,15 @@ public class ReadAndRepeatActivity extends Activity implements View.OnClickListe
         progressText = (TextView) findViewById(R.id.read_progress);
         progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#fbc02d"), PorterDuff.Mode.SRC_IN);
         defaultProgressbar();
+
+        // Toast with basic game mode instructions
+        final Toast instruction = Toast.makeText(getBaseContext(), "Klick auf das Mikrofon und warte auf den Ton um den Text vorzusprechen.", Toast.LENGTH_SHORT);
+        instruction.show();
+        new CountDownTimer(6000, 1000)
+        {
+            public void onTick(long millisUntilFinished) {instruction.show();}
+            public void onFinish() {instruction.show();}
+        }.start();
 
 
     }

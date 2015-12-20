@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,6 +40,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
     private Handler handler = new Handler();
     private TextView progressText;
     Button confirmButton;
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +73,17 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
         progressBar.getProgressDrawable().setColorFilter(Color.parseColor ("#ffd600"), PorterDuff.Mode.SRC_IN);
         defaultProgressbar();
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
+        // Toast with basic game mode instructions
+        final Toast instruction = Toast.makeText(getBaseContext(), "Wenn du auf \"Vorsprechen\" klickst wird dir das aktuelle Wort vorgelesen. " +
+                "Um es selbst zu wiederholen drücke auf das Mikrofon und warte auf den Ton.", Toast.LENGTH_SHORT);
+        instruction.show();
+        new CountDownTimer(9000, 1000)
+        {
+            public void onTick(long millisUntilFinished) {instruction.show();}
+            public void onFinish() {instruction.show();}
+        }.start();
     }
 
     protected void createTextToSpeech(){
@@ -80,7 +94,7 @@ public class ListenAndRepeatActivity extends Activity implements View.OnClickLis
                 t1.setLanguage(Locale.UK);
             }
             else {
-                Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Fehler beim Initialisieren der Sprachengine.", Toast.LENGTH_SHORT).show();
             }
         }
     });
