@@ -28,8 +28,6 @@ public class Data {
      */
     private int maxLevel;
 
-    // Construct data set based on supplied mode
-
     /** Constructor
      * <p>Create data set based on supplied mode with corresponding word list array array</p>
      *
